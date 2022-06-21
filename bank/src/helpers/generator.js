@@ -1,19 +1,3 @@
-// class getUpper {
-//     constructor(lowerCase, upperCase, randomSymbols, )
-
-//   getUpperCaseLetter() {
-//     console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97));
-//   }
-// }
-
-// class getLower extends getUpper {
-//   getLowerCaseLetter() {
-//     return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-//   }
-// }
-
-// getUpper.getUpperCaseLetter();
-
 function generate(amount) {
   const arr = [];
   const symbols = "!@#$%^&*(){}[]=<>/,.";
