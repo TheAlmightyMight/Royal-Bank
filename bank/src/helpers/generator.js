@@ -1,6 +1,6 @@
-function generate(amount) {
+function Generate(amount) {
   const arr = [];
-  const symbols = "!@#$%^&*(){}[]=<>/,.";
+  const symbols = "!@#$%^&*";
   for (let i = 0; i < amount; i++) {
     let expr = Math.round(Math.random() * 2);
     switch (expr) {
@@ -20,4 +20,4 @@ function generate(amount) {
   return arr.join("");
 }
 
-console.log(generate(20));
+export default Generate;

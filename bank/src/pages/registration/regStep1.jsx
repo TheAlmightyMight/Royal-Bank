@@ -7,7 +7,6 @@ import {
   Button,
   Typography,
   InputAdornment,
-  InputLabel,
   FormControl,
 } from "@mui/material";
 
@@ -22,21 +21,21 @@ import { useNavigate } from "react-router-dom";
 
 function Registration() {
   const navigate = useNavigate();
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     amount: "",
     password: "",
     weight: "",
     weightRange: "",
-    showPassword: false,
+    // showPassword: false,
   });
-  const showPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
+  // const showPassword = () => {
+  //   setValues({
+  //     ...values,
+  //     showPassword: !values.showPassword,
+  //   });
+  // };
   return (
-    <Box md sx={{ display: "grid", placeItems: "center", mt: "0" }}>
+    <Box sx={{ display: "grid", placeItems: "center", mt: "0" }}>
       <Box
         autoComplete="on"
         sx={{
@@ -49,7 +48,7 @@ function Registration() {
         component="form"
         noValidate
       >
-        <Typography variant="h4" component="h1">
+        <Typography variant="h4" component="h3">
           Введите ваши данные
         </Typography>
         <FormControl sx={{ mt: "1.5rem", minWidth: "inherit" }}>
