@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //MUI components
 import {
@@ -16,8 +16,117 @@ import PersonIcon from "@mui/icons-material/Person";
 //Router
 import { useNavigate } from "react-router-dom";
 
+// /\d{4}/gm
+// /\d{6}/gm
+
 function RegStep2() {
   const navigate = useNavigate();
+  const [values, setValues] = useState({
+    serialNumber: {
+      value: "",
+      error: false,
+    },
+    number: {
+      value: "",
+      error: false,
+    },
+    date: {
+      date: "",
+      error: false,
+    },
+    givenFrom: {
+      value: "",
+      error: false,
+    },
+  });
+  const serialNumberHandler = (e) => {
+    let reg = /\d{4}/;
+    if (values.serialNumber.value === "") {
+      setValues({
+        ...values,
+        serialNumber: {
+          ...values.serialNumber,
+          error: true,
+        },
+      });
+    }
+    if (
+      reg.test(String(e.target.value).toLowerCase()) &&
+      e.target.value.length === 4
+    ) {
+      setValues({
+        ...values,
+        serialNumber: {
+          value: e.target.value,
+          error: false,
+        },
+      });
+    } else {
+      setValues({
+        ...values,
+        serialNumber: {
+          value: e.target.value,
+          error: true,
+        },
+      });
+    }
+  };
+  const numberHandler = (e) => {
+    let reg = /\d{6}/;
+    if (values.serialNumber.value === "") {
+      setValues({
+        ...values,
+        number: {
+          ...values.serialNumber,
+          error: true,
+        },
+      });
+    }
+    if (
+      reg.test(String(e.target.value).toLowerCase()) &&
+      e.target.value.length === 6
+    ) {
+      setValues({
+        ...values,
+        number: {
+          value: e.target.value,
+          error: false,
+        },
+      });
+    } else {
+      setValues({
+        ...values,
+        number: {
+          value: e.target.value,
+          error: true,
+        },
+      });
+    }
+  };
+  const dateCheck = (e) => {
+    if (values.date.date) {
+      setValues({
+        ...values,
+        date: {
+          date: e.target.value,
+          error: false,
+        },
+      });
+    } else {
+      setValues({
+        ...values,
+        date: {
+          // ...values.date,
+          date: e.target.value,
+          error: true,
+        },
+      });
+    }
+  };
+  const nameCheck = (e) => {
+    const reg =
+      /^([А-ЯA-Z]|[А-ЯA-Z][\x27а-яa-z]{1,}|[А-ЯA-Z][\x27а-яa-z]{1,}\-([А-ЯA-Z][\x27а-яa-z]{1,}|(оглы)|(кызы)))\040[А-ЯA-Z][\x27а-яa-z]{1,}(\040[А-ЯA-Z][\x27а-яa-z]{1,})?$/;
+  };
   return (
     <Box
       sx={{
@@ -44,17 +153,32 @@ function RegStep2() {
 
         <Grid item xs={4}>
           <FormControl fullWidth sx={{ mr: "1rem", mt: "1.5rem" }}>
-            <TextField type="text" label={"серия"}></TextField>
+            <TextField
+              error={values.serialNumber.error}
+              onChange={(e) => serialNumberHandler(e)}
+              type="text"
+              label={"серия"}
+            ></TextField>
           </FormControl>
         </Grid>
         <Grid item xs={8}>
           <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField type="text" label={"номер"}></TextField>
+            <TextField
+              error={values.number.error}
+              onChange={(e) => numberHandler(e)}
+              type="text"
+              label={"номер"}
+            ></TextField>
           </FormControl>
         </Grid>
         <Grid item xs={4}>
           <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField helperText="Дата выдачи" type="date"></TextField>
+            <TextField
+              error={values.date.date ? false : true}
+              onBlur={(e) => dateCheck(e)}
+              helperText="Дата выдачи"
+              type="date"
+            ></TextField>
           </FormControl>
         </Grid>
         <Grid item xs={8}>

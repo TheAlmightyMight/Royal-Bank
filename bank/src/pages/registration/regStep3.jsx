@@ -22,8 +22,9 @@ import Logo from "../../components/logo";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
+// import PhoneIcon from "@mui/icons-material/Phone";
 import CheckIcon from "@mui/icons-material/Check";
+import PersonIcon from "@mui/icons-material/Person";
 
 function RegStep3() {
   const navigate = useNavigate();
@@ -33,15 +34,85 @@ function RegStep3() {
     passwordHint: false,
   });
   const [values, setValues] = useState({
-    email: "",
-    phone: "",
+    email: {
+      value: "",
+      error: false,
+    },
+    login: {
+      value: "",
+      error: false,
+    },
     password: "",
-    checkPassword: "",
+    checkPassword: " ",
   });
   const generatorHandler = () => {
     let pass = Generate(20);
     console.log("lol");
     setValues({ ...values, password: pass });
+    setPasswordShown({
+      ...passwordShown,
+      passwordHint: !passwordShown.passwordHint,
+    });
+  };
+  const loginHandler = (e) => {
+    let reg = /^[a-z]+([-_]?[a-z0-9]+){0,2}$/i;
+    if (values.login.value === "") {
+      setValues({
+        ...values,
+        login: {
+          ...values.login,
+          error: true,
+        },
+      });
+    }
+    if (reg.test(String(e.target.value).toLowerCase())) {
+      setValues({
+        ...values,
+        login: {
+          ...values.email,
+          error: false,
+        },
+      });
+    } else {
+      setValues({
+        ...values,
+        login: {
+          value: e.target.value,
+          error: true,
+        },
+      });
+    }
+  };
+  const emailHandler = (e) => {
+    let reg =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (values.email.value === "") {
+      setValues({
+        ...values,
+        email: {
+          ...values.email,
+          error: true,
+        },
+      });
+    }
+    if (reg.test(String(e.target.value).toLowerCase())) {
+      setValues({
+        ...values,
+        email: {
+          value: e.target.value,
+          error: false,
+        },
+      });
+    } else {
+      setValues({
+        ...values,
+
+        email: {
+          value: e.target.value,
+          error: true,
+        },
+      });
+    }
   };
   return (
     <Box
@@ -73,6 +144,21 @@ function RegStep3() {
         <Grid item xs={12}>
           <FormControl fullWidth sx={{ mt: "1.5rem" }}>
             <TextField
+              error={values.login.error}
+              onChange={(e) => loginHandler(e)}
+              InputProps={{
+                endAdornment: <PersonIcon sx={{ mr: "0.6rem" }} />,
+              }}
+              type="text"
+              label={"Логин"}
+            ></TextField>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <FormControl fullWidth sx={{ mt: "1.5rem" }}>
+            <TextField
+              error={values.email.error}
+              onChange={(e) => emailHandler(e)}
               InputProps={{
                 endAdornment: <EmailIcon sx={{ mr: "0.6rem" }} />,
               }}
@@ -81,32 +167,49 @@ function RegStep3() {
             ></TextField>
           </FormControl>
         </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField
-              InputProps={{
-                endAdornment: <PhoneIcon sx={{ mr: "0.6rem" }} />,
-              }}
-              type="text"
-              label={"Логин"}
-            ></TextField>
-          </FormControl>
-        </Grid>
         <Grid sx={{ position: "relative" }} item xs={12}>
+          {passwordShown.passwordHint && (
+            <Alert
+              role="alert"
+              severity="warning"
+              variant="filled"
+              component="div"
+              action={
+                <IconButton
+                  onClick={() => generatorHandler()}
+                  sx={{ mb: "0.5rem" }}
+                >
+                  <CheckIcon />
+                </IconButton>
+              }
+              sx={{
+                mb: "2rem",
+                position: "absolute",
+                zIndex: "10",
+                inset: "0 0 50px 100px ",
+              }}
+            >
+              Сгенерировать пароль?
+            </Alert>
+          )}
           <FormControl fullWidth sx={{ mt: "1.5rem" }}>
             <TextField
+              autoComplete="false"
+              onChange={(e) =>
+                setValues({ ...values, password: e.target.value })
+              }
               onFocus={() =>
                 setPasswordShown({
                   ...passwordShown,
                   passwordHint: !passwordShown.passwordHint,
                 })
               }
-              onBlur={() =>
-                setPasswordShown({
-                  ...passwordShown,
-                  passwordHint: !passwordShown.passwordHint,
-                })
-              }
+              // onBlur={() =>
+              //   setPasswordShown({
+              //     ...passwordShown,
+              //     passwordHint: !passwordShown.passwordHint,
+              //   })
+              // }
               type={passwordShown.password ? "password" : "text"}
               label={"Пароль"}
               value={values.password}
@@ -132,34 +235,15 @@ function RegStep3() {
                 ),
               }}
             ></TextField>
-            {passwordShown.passwordHint && (
-              <Alert
-                severity="warning"
-                variant="filled"
-                component="div"
-                action={
-                  <IconButton
-                    onClick={() => generatorHandler()}
-                    sx={{ mb: "0.5rem" }}
-                  >
-                    <CheckIcon />
-                  </IconButton>
-                }
-                sx={{
-                  mb: "2rem",
-                  position: "absolute",
-                  zIndex: "10",
-                  inset: "0 0 10px 100px ",
-                }}
-              >
-                Сгенерировать пароль?
-              </Alert>
-            )}
           </FormControl>
         </Grid>
         <Grid item xs={12}>
           <FormControl fullWidth sx={{ mt: "1rem" }}>
             <TextField
+              onChange={(e) =>
+                setValues({ ...values, checkPassword: e.target.value })
+              }
+              autoComplete="false"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

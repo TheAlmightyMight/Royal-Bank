@@ -12,9 +12,9 @@ import {
 
 //MUI icons
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 //router
 import { useNavigate } from "react-router-dom";
@@ -22,18 +22,58 @@ import { useNavigate } from "react-router-dom";
 function Registration() {
   const navigate = useNavigate();
   const [values, setValues] = useState({
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    // showPassword: false,
+    name: {
+      value: "",
+      error: false,
+    },
+    surname: {
+      value: "",
+      error: false,
+    },
+    thirdName: {
+      value: "",
+      error: false,
+    },
+    date: {
+      value: "",
+      error: false,
+    },
+    phone: {
+      value: "",
+      error: false,
+    },
   });
-  // const showPassword = () => {
-  //   setValues({
-  //     ...values,
-  //     showPassword: !values.showPassword,
-  //   });
-  // };
+  const nameCheck = (e) => {
+    let reg =
+      /^[А-ЯЁ][а-яё]*([-][А-ЯЁ][а-яё]*)?\s[А-ЯЁ][а-яё]*\s[А-ЯЁ][а-яё]*$/g;
+    if (values.name.value === "") {
+      setValues({
+        ...values,
+        name: {
+          ...values.name,
+          error: true,
+        },
+      });
+    }
+    if (reg.test(String(e.target.value).toLowerCase())) {
+      console.log("yay");
+      setValues({
+        ...values,
+        name: {
+          ...values.name,
+          error: true,
+        },
+      });
+    } else {
+      setValues({
+        ...values,
+        name: {
+          value: e.target.value,
+          error: false,
+        },
+      });
+    }
+  };
   return (
     <Box sx={{ display: "grid", placeItems: "center", mt: "0" }}>
       <Box
@@ -53,6 +93,8 @@ function Registration() {
         </Typography>
         <FormControl sx={{ mt: "1.5rem", minWidth: "inherit" }}>
           <TextField
+            error={values.name.error}
+            onChange={(e) => nameCheck(e)}
             helperText="Введите вашу фамилию"
             type="text"
             label={"Фамилия"}
