@@ -207,12 +207,6 @@ function RegStep3() {
                   passwordHint: !passwordShown.passwordHint,
                 })
               }
-              // onBlur={() =>
-              //   setPasswordShown({
-              //     ...passwordShown,
-              //     passwordHint: !passwordShown.passwordHint,
-              //   })
-              // }
               type={passwordShown.password ? "password" : "text"}
               label={"Пароль"}
               value={values.password}
