@@ -261,7 +261,7 @@ function Registration() {
         component="form"
         noValidate
       >
-        <Grid item sx={{ mt: "3rem" }} xs={12}>
+        <Grid item style={{ mt: "3rem" }} xs={12}>
           <Logo />
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
