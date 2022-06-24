@@ -22,7 +22,6 @@ import Logo from "../../components/logo";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import EmailIcon from "@mui/icons-material/Email";
-// import PhoneIcon from "@mui/icons-material/Phone";
 import CheckIcon from "@mui/icons-material/Check";
 import PersonIcon from "@mui/icons-material/Person";
 
@@ -137,7 +136,11 @@ function RegStep3() {
           <Logo />
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography sx={{ цfontWeight: "300" }} variant="h5" component="h3">
+          <Typography
+            sx={{ fontWeight: "300", fontFamily: "Poppins" }}
+            variant="h5"
+            component="h3"
+          >
             Введите данные для входа
           </Typography>
         </Grid>
@@ -275,7 +278,6 @@ function RegStep3() {
           xs={12}
           sx={{
             display: "grid",
-            width: "100%",
             placeItems: "center",
           }}
         >
