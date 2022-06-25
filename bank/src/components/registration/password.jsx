@@ -12,8 +12,14 @@ import {
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import CheckIcon from "@mui/icons-material/Check";
 
-function Password({ passwordShown, values, generatorHandler }) {
+function Password({
+  passwordShown,
+  setPasswordShown,
+  values,
+  generatorHandler,
+}) {
   return (
     <Grid sx={{ position: "relative" }} item xs={12}>
       {passwordShown.passwordHint && (

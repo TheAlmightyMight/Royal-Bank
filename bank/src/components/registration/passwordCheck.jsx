@@ -12,7 +12,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-function PasswordCheck({ values, passwordShown }) {
+function PasswordCheck({ passwordShown, values, setPasswordShown }) {
   return (
     <Grid item xs={12}>
       <FormControl fullWidth sx={{ mt: "1rem" }}>

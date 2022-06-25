@@ -24,8 +24,6 @@ import ProceedBtn from "../../components/registration/proceedBtn";
 import Password from "../../components/registration/password";
 
 //media
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import PasswordCheck from "../../components/registration/passwordCheck";
 
 function RegStep3() {
@@ -145,8 +143,13 @@ function RegStep3() {
           values={values}
           generatorHandler={generatorHandler}
           passwordShown={passwordShown}
+          setPasswordShown={setPasswordShown}
         />
-        <PasswordCheck passwordShown={passwordShown} values={values} />
+        <PasswordCheck
+          passwordShown={passwordShown}
+          values={values}
+          setPasswordShown={setPasswordShown}
+        />
         <ProceedBtn />
       </Grid>
     </Box>
