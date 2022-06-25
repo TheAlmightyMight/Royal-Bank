@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 
 //MUI components
-import {
-  TextField,
-  Box,
-  Grid,
-  Button,
-  Typography,
-  FormControl,
-} from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
-//MUI ICONS
+//components
+import Instruction from "../../components/registration/instruction";
 import Logo from "../../components/logo";
+import ProceedBtn from "../../components/registration/proceedBtn";
+import GivenFrom from "../../components/registration/givenFrom";
+import DateField from "../../components/registration/date";
+import SerialNumber from "../../components/registration/serialNumber";
 
 //Router
 import { useNavigate } from "react-router-dom";
-
-// /\d{4}/gm
-// /\d{6}/gm
 
 function RegStep2() {
   const navigate = useNavigate();
@@ -34,7 +29,6 @@ function RegStep2() {
     },
     {
       name: "date",
-      date: "",
       error: false,
     },
     {
@@ -187,7 +181,7 @@ function RegStep2() {
     }
   };
   const nextStep = () => {
-    let check = values.some((el) => el.value === "");
+    let check = values.some((el) => el.value === "" || el.date === "");
     if (check) {
       alert("Ошибка валидации");
     } else {
@@ -215,88 +209,29 @@ function RegStep2() {
         <Grid item sx={{ mb: "1rem" }} xs={12}>
           <Logo />
         </Grid>
-        <Grid item xs={12}>
-          <Typography
-            sx={{
-              fontWeight: "300",
-              fontFamily: "Poppins",
-              textAlign: "center",
-            }}
-            variant="h5"
-            component="h3"
-          >
-            Введите данные для входа
-          </Typography>
-        </Grid>
-
-        <Grid item xs={4}>
-          <FormControl fullWidth sx={{ mr: "1rem", mt: "1.5rem" }}>
-            <TextField
-              error={values[0].error}
-              onChange={(e) => serialNumberHandler(e)}
-              type="text"
-              label={"серия"}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={8}>
-          <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField
-              error={values[1].error}
-              onChange={(e) => numberHandler(e)}
-              type="text"
-              label={"номер"}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={4}>
-          <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField
-              error={values[2].error}
-              onChange={(e) => dateHandler(e)}
-              helperText="Дата выдачи"
-              type="date"
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={8}>
-          <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField
-              error={values[3].error}
-              onChange={(e) => fromHandler(e)}
-              label={"Выдан"}
-              helperText="Кем выдан"
-              type="text"
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{
-            display: "grid",
-            width: "100%",
-            placeItems: "center",
-          }}
-        >
-          <Button
-            onClick={() => nextStep()}
-            style={{
-              background: "hsla(5, 100%, 50%, 1)",
-            }}
-            sx={{
-              width: "225px",
-              height: "50px",
-              color: "black",
-              border: "1px solid black",
-              mt: "3rem",
-            }}
-            variant="contained"
-            color="error"
-          >
-            Следующий шаг
-          </Button>
-        </Grid>
+        <Instruction />
+        <SerialNumber
+          columns={4}
+          text={"серия"}
+          values={values}
+          index={0}
+          numberHandler={serialNumberHandler}
+        />
+        <SerialNumber
+          columns={8}
+          text={"номер"}
+          values={values}
+          index={1}
+          numberHandler={numberHandler}
+        />
+        <DateField
+          dateHandler={dateHandler}
+          values={values}
+          columns={4}
+          index={2}
+        />
+        <GivenFrom values={values} fromHandler={fromHandler} />
+        <ProceedBtn nextStep={nextStep} />
       </Grid>
     </Box>
   );

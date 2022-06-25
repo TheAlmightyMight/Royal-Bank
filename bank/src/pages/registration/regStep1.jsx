@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from "react";
 
 //MUI components
-import {
-  TextField,
-  Box,
-  Button,
-  Typography,
-  InputAdornment,
-  FormControl,
-  Grid,
-} from "@mui/material";
+import { Box, Grid } from "@mui/material";
+
+import Instruction from "../../components/registration/instruction";
+import NameField from "../../components/registration/name";
+import DateField from "../../components/registration/date";
+import PhoneField from "../../components/registration/phone";
+import ProceedBtn from "../../components/registration/proceedBtn";
 
 //MUI icons
 import Logo from "../../components/logo";
-import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-import PersonIcon from "@mui/icons-material/Person";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 //router
 import { useNavigate } from "react-router-dom";
 
 //@^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$@gm
 
-function Registration() {
+function RegistrationStep1() {
   const navigate = useNavigate();
   const [values, setValues] = useState([
     {
@@ -264,124 +259,37 @@ function Registration() {
         <Grid item style={{ marginTop: "3rem" }} xs={12}>
           <Logo />
         </Grid>
-        <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography
-            sx={{ fontWeight: "300", fontFamily: "Poppins" }}
-            variant="h5"
-            component="h3"
-          >
-            Введите данные для входа
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1.5rem", minWidth: "inherit" }}>
-            <TextField
-              error={values[0].error}
-              onChange={(e) => surnameCheck(e)}
-              helperText="Введите вашу фамилию"
-              type="text"
-              label={"Фамилия"}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonIcon></PersonIcon>
-                  </InputAdornment>
-                ),
-              }}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1.5rem", minWidth: "inherit" }}>
-            <TextField
-              error={values[1].error}
-              onChange={(e) => nameCheck(e)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonIcon></PersonIcon>
-                  </InputAdornment>
-                ),
-              }}
-              helperText="Введите ваше имя"
-              type="text"
-              label={"Имя"}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1.5rem", minWidth: "inherit" }}>
-            <TextField
-              error={values[2].error}
-              onChange={(e) => nameCheck2(e)}
-              helperText="Введите ваше отчество"
-              type="text"
-              label={"Отчество"}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonIcon></PersonIcon>
-                  </InputAdornment>
-                ),
-              }}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1.5rem", minWidth: "inherit" }}>
-            <TextField
-              error={values[3].error}
-              onChange={(e) => dateHandler(e)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <CalendarMonthIcon></CalendarMonthIcon>
-                  </InputAdornment>
-                ),
-              }}
-              helperText="Введите вашу дату рождения"
-              type="date"
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1.5rem", minWidth: "inherit" }}>
-            <TextField
-              error={values[4].error}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PhoneAndroidIcon></PhoneAndroidIcon>
-                  </InputAdornment>
-                ),
-              }}
-              helperText="Введите ваш телефон в указанном формате: +79923546783"
-              defaultValue="+7"
-              onChange={(e) => phoneHandler(e)}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid sx={{ display: "grid", placeItems: "center" }} item xs={12}>
-          <Button
-            style={{
-              background: "hsla(5, 100%, 50%, 1)",
-            }}
-            onClick={() => nextStep()}
-            sx={{
-              width: "225px",
-              height: "50px",
-              color: "black",
-              border: "1px solid black",
-              mt: "3rem",
-            }}
-            variant="contained"
-          >
-            Следующий шаг
-          </Button>
-        </Grid>
+        <Instruction />
+        <NameField
+          name={"Фамилия"}
+          text={"Введите вашу фамилию"}
+          nameCheck={surnameCheck}
+          values={values}
+        />
+        <NameField
+          name={"Имя"}
+          text={"Введите ваше имя"}
+          nameCheck={nameCheck}
+          values={values}
+        />
+        <NameField
+          name={"Отчество"}
+          text={"Введите вашу отчество"}
+          nameCheck={nameCheck2}
+          values={values}
+        />
+        <DateField
+          text={"Введите вашу дату рождения"}
+          dateHandler={dateHandler}
+          values={values}
+          columns={12}
+          index={3}
+        />
+        <PhoneField values={values} phoneHandler={phoneHandler} />
+        <ProceedBtn nextStep={nextStep} />
       </Grid>
     </Box>
   );
 }
 
-export default Registration;
+export default RegistrationStep1;

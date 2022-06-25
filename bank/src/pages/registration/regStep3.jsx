@@ -6,8 +6,6 @@ import {
   TextField,
   Box,
   Grid,
-  Button,
-  Typography,
   InputAdornment,
   IconButton,
   FormControl,
@@ -17,13 +15,18 @@ import {
 //helpers
 import Generate from "../../helpers/generator";
 
-//media
+//components
 import Logo from "../../components/logo";
+import Email from "../../components/registration/email";
+import Instruction from "../../components/registration/instruction";
+import Login from "../../components/registration/login";
+import ProceedBtn from "../../components/registration/proceedBtn";
+import Password from "../../components/registration/password";
+
+//media
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import EmailIcon from "@mui/icons-material/Email";
-import CheckIcon from "@mui/icons-material/Check";
-import PersonIcon from "@mui/icons-material/Person";
+import PasswordCheck from "../../components/registration/passwordCheck";
 
 function RegStep3() {
   const navigate = useNavigate();
@@ -135,161 +138,16 @@ function RegStep3() {
         <Grid item sx={{ mb: "1rem" }} xs={12}>
           <Logo />
         </Grid>
-        <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography
-            sx={{ fontWeight: "300", fontFamily: "Poppins" }}
-            variant="h5"
-            component="h3"
-          >
-            Введите данные для входа
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField
-              error={values.login.error}
-              onChange={(e) => loginHandler(e)}
-              InputProps={{
-                endAdornment: <PersonIcon sx={{ mr: "0.6rem" }} />,
-              }}
-              type="text"
-              label={"Логин"}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField
-              error={values.email.error}
-              onChange={(e) => emailHandler(e)}
-              InputProps={{
-                endAdornment: <EmailIcon sx={{ mr: "0.6rem" }} />,
-              }}
-              type="email"
-              label={"Электронный адрес"}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid sx={{ position: "relative" }} item xs={12}>
-          {passwordShown.passwordHint && (
-            <Alert
-              role="alert"
-              severity="warning"
-              variant="filled"
-              component="div"
-              action={
-                <IconButton
-                  onClick={() => generatorHandler()}
-                  sx={{ mb: "0.5rem" }}
-                >
-                  <CheckIcon />
-                </IconButton>
-              }
-              sx={{
-                mb: "2rem",
-                position: "absolute",
-                zIndex: "10",
-                inset: "0 0 50px 100px ",
-              }}
-            >
-              Сгенерировать пароль?
-            </Alert>
-          )}
-          <FormControl fullWidth sx={{ mt: "1.5rem" }}>
-            <TextField
-              autoComplete="false"
-              onChange={(e) =>
-                setValues({ ...values, password: e.target.value })
-              }
-              onFocus={() =>
-                setPasswordShown({
-                  ...passwordShown,
-                  passwordHint: !passwordShown.passwordHint,
-                })
-              }
-              type={passwordShown.password ? "password" : "text"}
-              label={"Пароль"}
-              value={values.password}
-              helperText="Пароль может содержать только буквы латиницы, цифры и следующие специальные знаки: !@#$%^&* "
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() =>
-                        setPasswordShown({
-                          ...passwordShown,
-                          password: !passwordShown.password,
-                        })
-                      }
-                    >
-                      {passwordShown.password ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth sx={{ mt: "1rem" }}>
-            <TextField
-              onChange={(e) =>
-                setValues({ ...values, checkPassword: e.target.value })
-              }
-              autoComplete="false"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() =>
-                        setPasswordShown({
-                          ...passwordShown,
-                          checkPassword: !passwordShown.checkPassword,
-                        })
-                      }
-                    >
-                      {passwordShown.checkPassword ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              type={passwordShown.checkPassword ? "password" : "text"}
-              helperText="Повторите пароль"
-              label={"Пароль"}
-            ></TextField>
-          </FormControl>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <Button
-            onClick={() => navigate("/")}
-            sx={{
-              width: "225px",
-              height: "50px",
-              color: "black",
-              border: "1px solid black",
-              mt: "1rem",
-            }}
-            variant="contained"
-            color="error"
-          >
-            <Typography>Зарегистрироваться</Typography>
-          </Button>
-        </Grid>
+        <Instruction />
+        <Login loginHandler={loginHandler} values={values} />
+        <Email emailHandler={emailHandler} values={values} />
+        <Password
+          values={values}
+          generatorHandler={generatorHandler}
+          passwordShown={passwordShown}
+        />
+        <PasswordCheck passwordShown={passwordShown} values={values} />
+        <ProceedBtn />
       </Grid>
     </Box>
   );
