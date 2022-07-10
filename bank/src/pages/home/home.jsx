@@ -54,62 +54,53 @@ function Home() {
       transition={{ duration: 2 }}
     >
       <main className={styles.wrapper}>
-        <Grid
+        <Box
+          component="div"
           sx={{
-            height: "auto",
             display: "flex",
             alignItems: "center",
+            flexDirection: "column",
+            textAlign: "center",
           }}
-          container
         >
-          <Grid
+          <Logo />
+          <h1 className={styles.heading}>
+            Станьте нашим партнером прямо сейчас
+          </h1>
+          <Button
+            variant="contained"
+            onClick={() => navigate("/registration/step1")}
+            style={{ background: "hsla(5, 100%, 50%, 1)" }}
             sx={{
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
-              textAlign: "center",
+              width: "225px",
+              height: "60px",
+              fontFamily: "inherit",
+              fontSize: "1rem",
+              mb: "5rem",
             }}
-            item
-            xs={6}
           >
-            <Logo />
-            <h1 className={styles.heading}>
-              Станьте нашим партнером прямо сейчас
-            </h1>
-            <Button
-              variant="contained"
-              onClick={() => navigate("/registration/step1")}
-              sx={{
-                width: "225px",
-                height: "60px",
-                background: "hsla(5, 100%, 50%, 1)",
-                fontFamily: "inherit",
-                fontSize: "1rem",
-              }}
-            >
-              Регистрация
-            </Button>
-          </Grid>
-          <Grid sx={{ p: "3rem" }} item xs={6}>
-            <motion.ul className={styles.steps}>
-              {arr.map((el, i) => {
-                return (
-                  <motion.li
-                    variants={variants}
-                    custom={i}
-                    key={Math.random() * 1000}
-                    initial="hidden"
-                    animate="visible"
-                    className={styles.stepsItem}
-                  >
-                    {el.text}
-                    {el.icon}
-                  </motion.li>
-                );
-              })}
-            </motion.ul>
-          </Grid>
-        </Grid>
+            Регистрация
+          </Button>
+        </Box>
+        <Box component="div" sx={{ p: "3rem 3rem 0 3rem" }}>
+          <motion.ul className={styles.steps}>
+            {arr.map((el, i) => {
+              return (
+                <motion.li
+                  variants={variants}
+                  custom={i}
+                  key={Math.random() * 1000}
+                  initial="hidden"
+                  animate="visible"
+                  className={styles.stepsItem}
+                >
+                  {el.text}
+                  {el.icon}
+                </motion.li>
+              );
+            })}
+          </motion.ul>
+        </Box>
       </main>
     </motion.div>
   );

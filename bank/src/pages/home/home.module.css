@@ -25,11 +25,38 @@
 .heading {
   font-size: 64px;
   margin-bottom: 40px;
+  margin: 2rem;
 }
 
-/* @media (max-width: 1100px) {
+@media (max-width: 900px) {
   .wrapper {
-    flex-direction: column;
-    color: blue;
+    flex-direction: column-reverse;
+    font-size: 32px;
+    height: 100vh;
   }
-} */
+
+  .heading {
+    font-size: inherit;
+    margin-top: 6rem;
+  }
+
+  .stepsItem {
+    font-size: inherit;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    flex-direction: column-reverse;
+    font-size: 24px;
+    height: 100vh;
+  }
+
+  .heading {
+    font-size: inherit;
+  }
+
+  .stepsItem {
+    font-size: inherit;
+  }
+}
