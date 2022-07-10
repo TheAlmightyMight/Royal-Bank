@@ -124,11 +124,10 @@ function RegStep3() {
     <Box
       sx={{
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        overflowY: "none",
       }}
     >
       <Grid
@@ -139,9 +138,6 @@ function RegStep3() {
         component="form"
         noValidate
       >
-        <Grid item sx={{ mb: "1rem" }} xs={12}>
-          <Logo />
-        </Grid>
         <Instruction />
         <Login loginHandler={loginHandler} values={values} />
         <Email emailHandler={emailHandler} values={values} />

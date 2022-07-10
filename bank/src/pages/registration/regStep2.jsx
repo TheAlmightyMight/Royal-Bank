@@ -206,9 +206,6 @@ function RegStep2() {
         component="form"
         noValidate
       >
-        <Grid item sx={{ mb: "1rem" }} xs={12}>
-          <Logo />
-        </Grid>
         <Instruction />
         <SerialNumber
           columns={4}

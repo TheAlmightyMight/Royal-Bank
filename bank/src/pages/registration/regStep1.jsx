@@ -256,10 +256,6 @@ function RegistrationStep1() {
         component="form"
         noValidate
       >
-        <Grid item style={{ marginTop: "3rem" }} xs={12}>
-          <Logo />
-          <div style={{ height: "60px" }}></div>
-        </Grid>
         <Instruction />
         <NameField
           name={"Фамилия"}
