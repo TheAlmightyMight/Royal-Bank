@@ -54,16 +54,8 @@ function Home() {
       transition={{ duration: 2 }}
     >
       <main className={styles.wrapper}>
-        <Box
-          component="div"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-            textAlign: "center",
-          }}
-        >
-          <Logo />
+        <Logo />
+        <div className={styles.promo}>
           <h1 className={styles.heading}>
             Станьте нашим партнером прямо сейчас
           </h1>
@@ -76,13 +68,13 @@ function Home() {
               height: "60px",
               fontFamily: "inherit",
               fontSize: "1rem",
-              mb: "5rem",
+              mb: "2.5rem",
             }}
           >
             Регистрация
           </Button>
-        </Box>
-        <Box component="div" sx={{ p: "3rem 3rem 0 3rem" }}>
+        </div>
+        <div className={styles.list}>
           <motion.ul className={styles.steps}>
             {arr.map((el, i) => {
               return (
@@ -100,7 +92,8 @@ function Home() {
               );
             })}
           </motion.ul>
-        </Box>
+        </div>
+        <div style={{ height: "80px" }}></div>
       </main>
     </motion.div>
   );
