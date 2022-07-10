@@ -240,7 +240,7 @@ function RegistrationStep1() {
     <Box
       sx={{
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -258,6 +258,7 @@ function RegistrationStep1() {
       >
         <Grid item style={{ marginTop: "3rem" }} xs={12}>
           <Logo />
+          <div style={{ height: "60px" }}></div>
         </Grid>
         <Instruction />
         <NameField
