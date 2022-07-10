@@ -10,7 +10,7 @@ import PhoneField from "../../components/registration/phone";
 import ProceedBtn from "../../components/registration/proceedBtn";
 
 //MUI icons
-import Logo from "../../components/logo";
+import Logo from "../../components/logo/logo";
 
 //router
 import { useNavigate } from "react-router-dom";

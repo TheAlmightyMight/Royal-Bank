@@ -2,21 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 //MUI components
-import {
-  TextField,
-  Box,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  Alert,
-} from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 //helpers
 import Generate from "../../helpers/generator";
 
 //components
-import Logo from "../../components/logo";
+import Logo from "../../components/logo/logo";
 import Email from "../../components/registration/email";
 import Instruction from "../../components/registration/instruction";
 import Login from "../../components/registration/login";
@@ -42,8 +34,14 @@ function RegStep3() {
       value: "",
       error: false,
     },
-    password: "",
-    checkPassword: " ",
+    password: {
+      value: "",
+      error: false,
+    },
+    checkPassword: {
+      value: "",
+      error: false,
+    },
   });
   const generatorHandler = () => {
     let pass = Generate(20);
@@ -114,6 +112,14 @@ function RegStep3() {
       });
     }
   };
+  const nextStep = () => {
+    let check = values.some((el) => el.value === "");
+    if (check) {
+      alert("Ошибка валидации");
+    } else {
+      navigate("/registration/step3");
+    }
+  };
   return (
     <Box
       sx={{
@@ -150,7 +156,7 @@ function RegStep3() {
           values={values}
           setPasswordShown={setPasswordShown}
         />
-        <ProceedBtn />
+        <ProceedBtn nextStep={nextStep} />
       </Grid>
     </Box>
   );

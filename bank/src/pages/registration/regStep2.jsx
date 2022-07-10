@@ -5,7 +5,7 @@ import { Box, Grid } from "@mui/material";
 
 //components
 import Instruction from "../../components/registration/instruction";
-import Logo from "../../components/logo";
+import Logo from "../../components/logo/logo";
 import ProceedBtn from "../../components/registration/proceedBtn";
 import GivenFrom from "../../components/registration/givenFrom";
 import DateField from "../../components/registration/date";
